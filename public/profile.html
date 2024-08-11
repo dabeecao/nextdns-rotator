@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NextDNS xoay vòng là công cụ giúp bạn tạo một DNS over HTTPS để sử dụng nhiều tài khoản NextDNS cùng lúc.">
+  <meta name="keywords" content="NextDNS, DNS, bảo mật, dịch vụ DNS">
+  <meta property="og:title" content="NextDNS X - HostsVN">
+  <meta property="og:description" content="NextDNS xoay vòng là công cụ giúp bạn tạo một DNS over HTTPS để sử dụng nhiều tài khoản NextDNS cùng lúc">
+  <meta property="og:image" content="nextdnsx.png">
+  <meta property="og:url" content="https://nextdnsx2.hostsvn.org">
+  <meta property="og:type" content="website">
+  <title>Quản lý NextDNS X - HostsVN</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+  .bold-text {
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="https://nextdnsx2.hostsvn.org">NextDNS X</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://dabeecao.org#donate">Ủng hộ VDNS</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mt-4">
+    <h1 class="mb-4 text-center">Quản lý Profile NextDNS X</h1>
+    <div id="notification" class="alert d-none" role="alert"></div>
+    <form id="updateProfileForm">
+      <div class="form-group">
+        <label for="nextdnsUrl">Thêm địa chỉ profile NextDNS:</label>
+        <input type="text" id="nextdnsUrl" name="nextdnsUrl" class="form-control" placeholder="https://dns.nextdns.io/xxxyyy" required>
+      </div>
+      <button type="submit" id="addUrlButton" class="btn btn-primary btn-block">Thêm</button>
+    </form>
+
+    <h3 class="mt-4">Các địa chỉ profile của bạn</h3>
+    <ul id="urlList" class="list-group"></ul>
+
+    <button id="updateUrlsButton" class="btn btn-success btn-block mt-4">Cập nhật địa chỉ profile</button>
+    
+    <!-- Card for DoH URL -->
+    <div class="card mt-4">
+      <div class="card-body text-center">
+        <p class="card-title">Nếu không truy cập được mạng khi mới tạo tài khoản, hãy bấm Yêu cầu kích hoạt để liên hệ chúng tôi.</p>
+        <p class="mt-3">Địa chỉ DoH NextDNS X của bạn là:</p>
+        <p id="dohUrl" class="card-text bold-text"></p>
+        <p class="mt-3">Địa chỉ DoT NextDNS X của bạn là:</p>
+        <p id="dotUrl" class="card-text bold-text"></p>
+        <button id="copyDohUrlButton" class="btn btn-secondary">Sao chép URL DoH</button>
+        <button id="copyDotUrlButton" class="btn btn-secondary">Sao chép URL DoT</button>
+        <br>
+        <br>
+        <button id="setupIosButton" class="btn btn-primary">Cài đặt cho iOS/iPadOS/macOS</button>
+      </div>
+    </div>
+
+    <button id="contactSupportButton" class="btn btn-warning btn-block mt-2" onclick="window.location.href='https://t.me/dabeecao'">Yêu cầu kích hoạt</button>
+    <button id="logoutButton" class="btn btn-danger btn-block mt-2">Đăng xuất</button>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="notificationMessage">
+        <!-- Nội dung thông báo sẽ được cập nhật bằng JavaScript -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center text-lg-start mt-4">
+    <div class="container p-4">
+      <p class="text-muted mb-0">© 2024 NextDNS X - Powered by HostsVN - Developed by @dabeecao</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById('setupIosButton').addEventListener('click', function() {
+      var dohUrl = document.getElementById('dohUrl').textContent;
+      var dotUrl = document.getElementById('dotUrl').textContent;
+      var url = 'https://vdns.io.vn/creat-config.php?url=' + encodeURIComponent(dohUrl);
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>

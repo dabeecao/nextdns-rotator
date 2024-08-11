@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NextDNS xoay vòng là công cụ giúp bạn tạo một DNS over HTTPS để sử dụng nhiều tài khoản NextDNS cùng lúc.">
+  <meta name="keywords" content="NextDNS, DNS, bảo mật, dịch vụ DNS">
+  <meta property="og:title" content="NextDNS X - HostsVN">
+  <meta property="og:description" content="NextDNS xoay vòng là công cụ giúp bạn tạo một DNS over HTTPS để sử dụng nhiều tài khoản NextDNS cùng lúc">
+  <meta property="og:image" content="nextdnsx.png">
+  <meta property="og:url" content="https://nextdnsx2.hostsvn.org">
+  <meta property="og:type" content="website">
+  <title>Đăng kí NextDNS X - HostsVN</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Ensure that the body takes at least the full height of the viewport */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* Make the body a flex container */
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Push the footer to the bottom */
+    .main-content {
+      flex: 1;
+    }
+  </style>
+  <script src="auth-check.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="https://nextdnsx2.hostsvn.org">NextDNS X</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Đăng nhập</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mt-4 main-content">
+    <h1 class="mb-4 text-center">Tạo tài khoản NextDNS X</h1>
+    <div id="notification" class="alert d-none" role="alert"></div>
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="username">Tên đăng nhập:</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Đăng kí</button>
+    </form>
+    <div class="text-center mt-3">
+      <br>
+      <p>Thông tin tài khoản của bạn sau khi tạo được mã hoá và không ai kể cả chúng tôi có thể biết được, xin hãy lưu lại mật khẩu vì bạn sẽ không thể lấy lại nếu quên.</p>
+      <a href="login.html" class="btn btn-success btn-block">Đã có tài khoản?</a>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="notificationMessage">
+          <!-- Nội dung thông báo sẽ được cập nhật bằng JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center text-lg-start mt-4">
+    <div class="container p-4">
+      <p class="text-muted mb-0">© 2024 NextDNS X - Powered by HostsVN - Developed by @dabeecao</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      var username = document.getElementById('username').value;
+      var usernamePattern = /^[a-zA-Z0-9_]+$/;
+
+      if (!usernamePattern.test(username)) {
+        event.preventDefault();
+        var notification = document.getElementById('notification');
+        notification.textContent = 'Tên đăng nhập chỉ được phép chứa chữ cái, số và dấu gạch dưới.';
+        notification.classList.remove('d-none');
+        notification.classList.add('alert-danger');
+      }
+    });
+  </script>
+</body>
+</html>
